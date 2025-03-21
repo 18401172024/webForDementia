@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Dashboard</title>
+    <link rel="stylesheet" href="style10.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <!-- HEADER (Caregiver & Patient) -->
+    <header class="hello">
+        <img src="dashboard.jpg" alt="Caregiver" class="caregiver-img">
+        <h1>Patient Dashboard</h1>
+    </header>
+
+    <div class="container1">
+        <!-- Patient Profile -->
+        <section class="profile">
+            <h2>Patient Profile</h2>
+            <img src="patient.jpg" alt="Patient" class="patient-img">
+            <p><strong>Name:</strong> John Doe</p>
+            <p><strong>Age:</strong> 75</p>
+            <p><strong>Condition:</strong> Dementia</p>
+            <p><strong>Last Checkup:</strong> 10 March 2025</p>
+        </section>
+
+        <!-- Reminders & Alerts -->
+        <section class="reminders">
+            <h2>Reminders & Alerts</h2>
+            <ul id="reminder-list">
+                <li>🕒 Medication - 12:00 PM</li>
+                <li>📅 Doctor Visit - 4:00 PM</li>
+            </ul>
+            <input type="text" id="new-reminder" placeholder="Add reminder">
+            <button onclick="addReminder()">Add Reminder</button>
+        </section>
+
+        <!-- Patient Condition Graph -->
+        <section class="health">
+            <h2>Health Condition Analysis</h2>
+            <canvas id="conditionChart"></canvas>
+            <canvas id="pieChart"></canvas>
+        </section>
+    </div>
+
+    <script>
+        // Function to Add Reminder
+function addReminder() {
+    let reminderText = document.getElementById("new-reminder").value;
+    if (reminderText === "") {
+        alert("Please enter a reminder!");
+        return;
+    }
+
+    let newReminder = document.createElement("li");
+    newReminder.innerText = reminderText;
+    document.getElementById("reminder-list").appendChild(newReminder);
+    document.getElementById("new-reminder").value = "";
+}
+
+// Condition Comparison Graph
+const ctx = document.getElementById('conditionChart').getContext('2d');
+const conditionChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: ['January', 'February', 'March', 'April', 'May'],
+        datasets: [{
+            label: 'Cognitive Function Score',
+            data: [80, 75, 70, 65, 60], // Example Scores
+            borderColor: 'blue',
+            borderWidth: 2
+        }]
+    },
+    options: {
+        responsive: true,
+        scales: {
+            y: {
+                beginAtZero: false
+            }
+        }
+    }
+});
+
+// Pie Chart for Memory & Attention Levels
+const ctx2 = document.getElementById('pieChart').getContext('2d');
+const pieChart = new Chart(ctx2, {
+    type: 'pie',
+    data: {
+        labels: ['Memory Retention', 'Attention', 'Decision Making'],
+        datasets: [{
+            label: 'Current Health Status',
+            data: [50, 30, 20], // Example Data
+            backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
+        }]
+    },
+    options: {
+        responsive: true
+    }
+});
+
+
+    </script>
+</body>
+</html>

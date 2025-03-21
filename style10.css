@@ -1,0 +1,80 @@
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header */
+.hello {
+    text-align: center;
+    background: #0077b6;
+    color: white;
+    padding: 20px;
+}
+
+.caregiver-img {
+    width: 100px;
+    border-radius: 50%;
+}
+
+/* Dashboard Container */
+.container1 {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px;
+}
+
+/* Sections */
+section {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    width: 30%;
+}
+
+/* Tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+/* Reminders List */
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    background: #e0f7fa;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+}
+
+/* Input and Button */
+input, button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+}
+
+button {
+    background: #0077b6;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #005f86;
+}

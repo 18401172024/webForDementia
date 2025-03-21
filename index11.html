@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neurolens Chatbot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 { color: #333; }
+        
+        #controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        #voiceSearchButton {
+            padding: 10px 15px;
+            font-size: 16px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        #voiceSearchButton:hover { background-color: #218838; }
+
+        .voice-bars {
+            display: flex;
+            gap: 3px;
+            align-items: center;
+            height: 30px;
+            margin-left: 10px;
+            display: none;
+        }
+        .bar {
+            width: 5px;
+            height: 5px;
+            background-color: #ff4500;
+            border-radius: 3px;
+            animation: voiceAnimation 1s infinite ease-in-out alternate;
+        }
+        @keyframes voiceAnimation {
+            0% { height: 5px; }
+            50% { height: 20px; }
+            100% { height: 5px; }
+        }
+        
+        #chat-container {
+            width: 80%;
+            max-width: 600px;
+            margin: 10px auto;
+            padding: 10px;
+            background: #d1d1d1;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow-y: auto;
+            max-height: 400px;
+            display: flex;
+            flex-direction: column;
+        }
+        .message {
+            padding: 10px;
+            margin: 5px;
+            border-radius: 10px;
+            max-width: 70%;
+            text-align: left;
+            word-wrap: break-word;
+            background-color: white;
+        }
+        .user { background-color: #007BFF; color: white; align-self: flex-end; }
+        .assistant { background-color: #79d279; color: black; align-self: flex-start; }
+    </style>
+</head>
+<body>
+    <h1>Neurolens Chatbot</h1>
+    <div id="controls">
+        <button id="voiceSearchButton" onclick="startListening()"> Ask ChatBot </button>
+    </div>
+    <div id="voice-bars" class="voice-bars">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+    <div id="chat-container"></div>
+    
+    <script>
+        let recognition;
+        if (window.SpeechRecognition || window.webkitSpeechRecognition) {
+            recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+            recognition.lang = 'en-US';
+        } else {
+            alert("Speech Recognition is not supported in this browser.");
+        }
+
+        function startListening() {
+            if (!recognition) return;
+
+            const voiceBars = document.getElementById("voice-bars");
+            voiceBars.style.display = "flex";
+            
+            recognition.start();
+
+            recognition.onresult = function(event) {
+                let userInput = event.results[0][0].transcript.toLowerCase();
+                addMessage(userInput, "user");
+                respond(userInput);
+            };
+
+            recognition.onend = function() {
+                voiceBars.style.display = "none";
+            };
+        }
+
+        function respond(userInput) {
+            const responses = [
+                { keywords: ["what is neurolens"], response: "Neurolens is an AI-powered smart glasses system designed to assist memory loss patients. It provides real-time facial recognition, object identification, and personalized reminders." },
+                { keywords: ["features"], response: "Neurolens offers facial recognition, object & place recognition, voice prompts, real-time alerts, a caregiver dashboard, and a thought diary." },
+                { keywords: ["facial recognition"], response: "Neurolens recognizes faces in real-time and recalls names to help patients remember their loved ones." },
+                { keywords: ["object recognition"], response: "Neurolens identifies objects and locations to assist patients in remembering where they are and what they are looking for." },
+                { keywords: ["voice prompts"], response: "Neurolens provides personalized voice prompts to guide patients through daily tasks and routines." },
+                { keywords: ["caregiver dashboard"], response: "Neurolens provides caregivers with real-time alerts and reports to monitor the patient's well-being." },
+                { keywords: ["thought diary"], response: "Neurolens records conversations and summarizes them, helping patients preserve their memories." },
+                { keywords: ["why use neurolens for dementia patients"], response: "Neurolens helps dementia patients by offering real-time assistance with facial recognition, object identification, and voice prompts, improving independence and reducing caregiver stress." },
+                { keywords: ["benefits of neurolens"], response: "Neurolens is lightweight, comfortable to wear, and provides essential memory support through AI-powered recognition and guidance." },
+                { keywords: ["is neurolens easy to carry"], response: "Yes, Neurolens is designed to be lightweight and comfortable, making it easy to wear throughout the day." },
+                { keywords: ["technology used in neurolens"], response: "Neurolens is powered by AI & Machine Learning models such as OpenCV for facial recognition, YOLO for object recognition, Whisper AI for speech processing, and a cognitive memory recall system." },
+                { keywords: ["hardware components"], response: "Neurolens includes a Qualcomm AI Chip/Raspberry Pi 4, high-resolution front camera, bone conduction speakers, an AR HUD display, and a Li-ion battery with Bluetooth/WiFi connectivity." },
+                { keywords: ["software architecture"], response: "Neurolens uses Next.js for the caregiver dashboard, React Native for mobile apps, FastAPI for backend, PostgreSQL for AI logs, and Firebase for real-time notifications." }
+            ];
+
+            let responseText = "I'm sorry, I didn't understand that. Could you ask something related to Neurolens?";
+            responses.forEach(entry => {
+                if (entry.keywords.some(keyword => userInput.includes(keyword))) {
+                    responseText = entry.response;
+                }
+            });
+
+            addMessage(responseText, "assistant");
+            speak(responseText);
+        }
+
+        function speak(text) {
+            window.speechSynthesis.cancel();
+            const speech = new SpeechSynthesisUtterance(text);
+            speech.volume = 1;
+            speech.rate = 1;
+            speech.pitch = 1;
+            window.speechSynthesis.speak(speech);
+        }
+
+        function addMessage(text, sender) {
+            const chatContainer = document.getElementById("chat-container");
+            const messageDiv = document.createElement("div");
+            messageDiv.classList.add("message", sender);
+            messageDiv.innerText = text;
+            chatContainer.appendChild(messageDiv);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+    </script>
+</body>
+</html>

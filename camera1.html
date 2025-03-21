@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capture Photo</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        video, #capturedImage {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+        .buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+        button, input[type="file"] {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        button {
+            background: #20832e;
+            color: white;
+        }
+        button:hover {
+            background: #e66b00;
+        }
+        input[type="file"] {
+            background: #ddd;
+            cursor: pointer;
+        }
+        #imageContainer {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            align-items: center;
+            justify-content: center;
+        }
+        #fullscreenImage {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Capture or Upload a Photo</h2>
+        <video id="video" autoplay></video>
+        <div class="buttons">
+            <button onclick="capturePhoto()">Capture Photo</button>
+            <input type="file" id="upload" accept="image/*" onchange="displayUploadedImage(event)">
+        </div>
+        <canvas id="canvas" style="display: none;"></canvas>
+        <img id="capturedImage" style="display: none;">
+    </div>
+    
+    <div id="imageContainer">
+        <img id="fullscreenImage">
+    </div>
+    
+    <!-- 🎵 Audio files for different actions -->
+    <audio id="audioCapture" src="WhatsApp-Audio-2025-03-21-at-18.36.24_24111bf6.waptt.mp3"></audio>
+    <audio id="audioUpload" src="WhatsApp-Audio-2025-03-21-at-18.47.29_3c04f030.waptt.mp3"></audio>
+    
+    <script>
+        const video = document.getElementById('video');
+        const canvas = document.getElementById('canvas');
+        const capturedImage = document.getElementById('capturedImage');
+        const imageContainer = document.getElementById('imageContainer');
+        const fullscreenImage = document.getElementById('fullscreenImage');
+        const audioCapture = document.getElementById('audioCapture');
+        const audioUpload = document.getElementById('audioUpload');
+
+        // ✅ Start camera automatically
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(stream => {
+                video.srcObject = stream;
+            })
+            .catch(err => console.error("Camera access denied", err));
+
+        // ✅ Capture photo and play audio1.mp3
+        function capturePhoto() {
+            const context = canvas.getContext('2d');
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+            capturedImage.src = canvas.toDataURL('image/png');
+            capturedImage.style.display = 'block';
+
+            // 🎵 Play sound on capture
+            audioCapture.play();
+        }
+
+        // ✅ Display uploaded image and play audio2.mp3
+        function displayUploadedImage(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    fullscreenImage.src = e.target.result;
+                    imageContainer.style.display = 'flex';
+
+                    // 🎵 Play sound on upload
+                    audioUpload.play();
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+    </script>
+</body>
+</html>

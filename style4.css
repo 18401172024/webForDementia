@@ -1,0 +1,168 @@
+.skills-container {
+    display: flex;
+    justify-content: space-between;  /* Keeps spacing even */
+    flex-wrap: nowrap;  /* Prevents wrapping to the next line */
+    gap: 15px;
+    padding: 20px;
+    margin-top: 20px;
+    overflow-x: auto;  /* Enables horizontal scrolling if needed */
+}
+
+/* Skill Box */
+.skill-box {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    flex: 1;  /* Allows dynamic sizing */
+    min-width: 200px;  /* Ensures they don’t shrink too much */
+    max-width: 23%;  /* Adjusted width to fit four in one row */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.skill-box:hover {
+    transform: translateY(-5px);
+}
+
+.skill-box img {
+    width: 100%;
+    height: 150px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.skill-box h3 {
+    font-size: 1.2em;
+    color: #165a32;
+    margin-bottom: 10px;
+}
+
+.skill-box p {
+    font-size: 1em;
+    text-align: center;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+/* Ensure text stays readable */
+.skill-box h2 {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #165a32;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .skills-container {
+        overflow-x: auto; /* Allows scrolling if necessary */
+        justify-content: flex-start; /* Aligns items to the left */
+    }
+
+    .skill-box {
+        min-width: 250px; /* Prevents shrinking */
+        max-width: 30%; /* Slightly larger for medium screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .skills-container {
+        flex-wrap: wrap; /* Allows wrapping for small screens */
+        justify-content: center;
+    }
+
+    .skill-box {
+        max-width: 100%; /* Stacks items vertically */
+    }
+}
+
+
+
+
+/* Increase font size of "Enhance Your Skills with Our Platform" */
+.skills-section h2 {
+    font-size: 3em; /* Bigger text */
+    font-weight: bold;
+    color: #165a32;
+    text-align: center;
+    margin-bottom: 5px; /* Reduce gap */
+}
+
+/* Center "Boost your career" and adjust spacing */
+.skills-section p {
+    font-size: 1.5em;
+    text-align: center;
+    color: #555;
+    margin-bottom: 0px; /* No extra space below */
+}
+
+/* Reduce top margin of skill boxes */
+.skills-container {
+    margin-top: 10px; /* Reduce space between text and skill boxes */
+}
+
+/* Keep skill box size the same */
+.skill-box {
+    width: 22%;
+}
+
+
+
+
+
+.upload-section {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    max-width: 600px;
+    text-align: center;
+}
+.upload-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+.custom-file-upload {
+    background: #20832e;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-weight: 600;
+}
+.custom-file-upload:hover {
+    background: #e66b00;
+}
+.preview-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1em;
+}
+.styled-button {
+    background: #165a32;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.2em;
+    transition: 0.3s;
+}
+.styled-button:hover {
+    background: #e66b00;
+}

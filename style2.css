@@ -1,0 +1,184 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #fcfcfc;
+}
+
+/* Navbar */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 10%;
+    background: rgb(23, 178, 103);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: 700;
+    color: #090a0a;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 600;
+}
+
+nav ul li a:hover {
+    color: #ff7b00;
+}
+
+/* Icons */
+.icons i {
+    font-size: 18px;
+    margin-left: 15px;
+    cursor: pointer;
+}
+
+/* Hero Section */
+.hero {
+    background: url('community.jpg') no-repeat center center/cover;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+    margin-top: 60px;
+}
+
+.hero-text {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 30px;
+    border-radius: 10px;
+}
+
+.hero h1 {
+    font-size: 36px;
+    font-weight: 700;
+}
+
+.hero h1 span {
+    color: #1da12a;
+}
+
+.hero p {
+    font-size: 16px;
+    margin: 15px 0;
+}
+
+
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #20832e;
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 5px;
+    transition: 0.3s;
+    cursor: pointer;
+}
+.btn:hover {
+    background: #e66b00;
+}
+#video, #capturedImage {
+    width: 80%;
+    max-width: 600px;
+}
+#imageContainer {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    align-items: center;
+    justify-content: center;
+}
+#fullscreenImage {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+
+
+.business-model {
+    background: url('community.jpg') no-repeat center center/cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #dff6e3;
+    padding: 40px;
+    border-radius: 15px;
+}
+.content-box {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    text-align: left;
+}
+.icon img {
+    width: 40px;
+}
+h2 {
+    font-size: 22px;
+    margin: 10px 0;
+}
+p {
+    font-size: 14px;
+    color: #555;
+}
+.buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+.btn {
+    background: #333;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 12px;
+}
+.btn:hover {
+    background: #555;
+}
+#voiceText {
+    width: 100%;
+    height: 60px;
+    margin-top: 10px;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    resize: none;
+}

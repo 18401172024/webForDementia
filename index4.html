@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style4.css">
+    <title>Document</title>
+</head>
+<body>
+    <section class="skills-section" id="browseSkills">
+        <h2 style="text-align: center;">Enhance Your Skills with Our Platform</h2>
+          <p>Boost your career by learning and mastering in-demand skills.</p>
+    
+        <div class="skills-container">
+            <div class="skill-box">
+                <img src="communication.webp.jpg" alt="Technical Skills">
+                <h3>Master Coding</h3>
+                <p>Learn programming languages like Python, JavaScript, and more to build amazing projects.</p>
+            </div>
+    
+            <div class="skill-box">
+                <img src="career.jpg" alt="Career Development">
+                <h3>Career Growth</h3>
+                <p>Develop essential career-building skills like resume writing, interview preparation, and networking.</p>
+            </div>
+    
+            <div class="skill-box">
+                <img src="communication.webp.jpg" alt="Soft Skills">
+                <h3>Effective Communication</h3>
+                <p>Enhance your verbal and written communication skills to excel in both personal and professional life.</p>
+            </div>
+    
+            <div class="skill-box">
+                <img src="mind.webp.jpg" alt="Life Skills">
+                <h3>Mindfulness & Well-Being</h3>
+                <p>Learn stress management, emotional intelligence, and mindfulness techniques for a balanced life.</p>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Image Upload Section -->
+    <section class="upload-section">
+        <h2 style="text-align: center; color: #165a32; font-size: 1.8em;">Upload Your Image</h2>
+        <div class="upload-container">
+            <label for="imageUpload" class="custom-file-upload">Choose Image</label>
+            <input type="file" id="imageUpload" accept="image/*" hidden>
+            <div class="preview-box" id="previewBox">
+                <img id="previewImage" src="" alt="Preview" style="display: none; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+                <textarea id="imageText" placeholder="Enter image description..."></textarea>
+            </div>
+            <button id="saveButton" class="styled-button">Save</button>
+        </div>
+    </section>
+    
+    <script>
+        document.getElementById("imageUpload").addEventListener("change", function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById("previewImage").src = e.target.result;
+                    document.getElementById("previewImage").style.display = "block";
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    
+        document.getElementById("saveButton").addEventListener("click", function() {
+            const imgSrc = document.getElementById("previewImage").src;
+            const imgText = document.getElementById("imageText").value;
+            if (imgSrc && imgText) {
+                const newBox = document.createElement("div");
+                newBox.classList.add("skill-box");
+                newBox.innerHTML = `<img src="${imgSrc}" alt="Uploaded Image" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);"><h3>${imgText}</h3><p>Uploaded by user</p>`;
+                document.getElementById("skillsContainer").appendChild(newBox);
+                document.getElementById("previewImage").src = "";
+                document.getElementById("previewImage").style.display = "none";
+                document.getElementById("imageText").value = "";
+            }
+        });
+    </script>
+    
+    
+</body>
+</html>

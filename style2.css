@@ -128,7 +128,7 @@ nav ul li a:hover {
 
 
 .business-model {
-    background: url('community.jpg') no-repeat center center/cover;
+    background-color: rgb(90, 90, 247);
     display: flex;
     justify-content: center;
     align-items: center;

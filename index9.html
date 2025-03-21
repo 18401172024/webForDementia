@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Responsive Hospital Website Design Tutorial</title>
+
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="style9.css">
+</head>
+
+<body>
+
+
+    <!-- header navbar section start  -->
+
+    <header>
+
+        <!-- logo name  -->
+        <a href="#" class="logo"><span>H</span>ealth <span>C</span>ares.</a>
+
+        <!-- navbar link  -->
+        <nav class="navbar">
+            <ul>
+                <li><a href="#home">home</a></li>
+                <li><a href="#about">about</a></li>    
+                <li><a href="#contact">contact</a></li>
+            </ul>
+        </nav>
+
+        <div class="fas fa-bars"></div>
+    </header>
+    <!-- header navbar section end  -->
+
+    <!-- home section start  -->
+
+    <section id="home" class="home">
+
+        <div class="row">
+
+            <!-- home images  -->
+            <div class="images">
+                <img src="st1.png" alt="">
+            </div>
+
+            <!-- home heading  -->
+            <div class="content">
+                <h1><span>AI-Powered Recognition </h1>
+                <p>Our advanced AI-powered system enables real-time facial and object recognition, enhancing efficiency and accuracy in various applications. Whether it's identifying individuals or detecting objects</p>
+                <a href="camera1.html"><button class="button">Capture image</button></a>
+            </div>
+        </div>
+    </section>
+    <!-- home section end  -->
+
+    <!-- about section start  -->
+
+    <section id="about" class="about">
+
+        <h1 class="heading">our other Features</h1>
+        <h3 class="title">learn and explore our features</h3>
+
+        <div class="box-container">
+
+            <!-- start here  -->
+            <div class="box">
+                <!-- about images  -->
+                <div class="images">
+                    <img src="st2.png" alt="">
+                </div>
+                
+                <!-- about heading & text  -->
+                <div class="content">
+                    <h3>Capture & Store Live: Identity Made Easy</h3>
+                    <p>Upload a photo, add details, and save it for quick identification. Easily manage and recognize faces or objects anytime.</p>
+                 <a href="index4.html"><button class="button">upload here</button></a>   
+                </div>
+            </div>
+            <!-- end here  -->
+
+            
+            <!-- start here  -->
+            <div class="box">
+                <!-- about images  -->
+                <div class="images">
+                    <img src="st3.png" alt="">
+                </div>
+                
+                <!-- about heading & text  -->
+                <div class="content">
+                    <h3>Speak & Store live: for reminding</h3>
+                    <p>Simply speak and save important details. Our voice recorder captures and stores information for quick recall anytime.</p>
+                    <button class="button" id="learnMoreEmergency">start here</button>
+                </div>
+                <textarea id="voiceText" placeholder="Your voice note will appear here..." readonly></textarea>
+            </div>
+            <!-- end here  -->
+
+            
+            <!-- start here  -->
+            <div class="box">
+                <!-- about images  -->
+                <div class="images">
+                    <img src="st3.png" alt="">
+                </div>
+                
+                <!-- about heading & text  -->
+                <div class="content">
+                    <h3>Ask & Listen Live: Find with Voice</h3>
+                    <p>Just ask, and get instant answers! Our smart voice assistant recalls and informs you about saved items, making it easy to find what you need.</p>
+                    <button class="button1" id="learnMoreCheckups">Ask Here</button>
+                </div>
+                <audio id="audioReminder" src="WhatsApp-Audio-2025-03-21-at-23.12.50_4211e05d.waptt.mp3"></audio>
+                
+            </div>
+            <!-- end here  -->
+           </div>
+    </section>  
+
+
+
+    <section class="caregiver-dashboard">
+        <h2>Caregiver Dashboard</h2>
+        <p>Access the caregiver dashboard to monitor and manage patient care efficiently.</p>
+        <button onclick="goToCaregiverDashboard()">Go to Caregiver Dashboard</button>
+    </section>
+    
+    <script>
+        function goToCaregiverDashboard() {
+            window.location.href = "index10.html"; // Change to actual caregiver dashboard page link
+        }
+    </script>
+
+
+    <section id="contact" class="contact">
+
+        <h1 class="heading">contact to caregiver</h1>
+        <h3 class="title">you can talk to his/her any times,</h3>
+
+        <div class="row">
+
+            <!-- form images  -->
+            <div class="images">
+                <img src="contact.jpg" alt="">
+            </div>
+
+            <div class="form-container">    
+
+            <input type="text" placeholder="Shikha Tiwari" name="" id="">
+            <input type="email" placeholder="message.gmail.com" name="" id="">
+
+            <input type="number" placeholder="9956000000" name="" id="">
+            <textarea name="" cols="30" rows="10" id=""></textarea>
+            <input type="submit" value="send">
+            </div>
+        </div>
+
+
+
+
+    </section>
+    <script>
+        // Check for Speech Recognition Support
+        if (!('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)) {
+            alert("⚠️ Your browser does not support speech recognition. Please use Google Chrome.");
+        } else {
+            const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+            recognition.lang = 'en-US'; // Set language to English
+            recognition.continuous = false;
+            recognition.interimResults = false;
+
+            // 🎤 Button 1: "Emergency Rooms" (Save Voice Note as Text)
+            document.getElementById("learnMoreEmergency").addEventListener("click", function() {
+                recognition.start();
+                alert("🎤 Voice recording started. Speak now...");
+
+                recognition.onresult = function(event) {
+                    const transcript = event.results[0][0].transcript;
+                    document.getElementById("voiceText").value = transcript;
+                    alert("✅ Your voice note is saved:\n" + transcript);
+                };
+
+                recognition.onerror = function(event) {
+                    alert("⚠️ Error occurred while recording: " + event.error);
+                };
+            });
+
+            // 🎵 Button 2: "Free Check-ups" (Record Voice & Play Audio)
+            document.getElementById("learnMoreCheckups").addEventListener("click", function() {
+                recognition.start();
+                alert("🎤 Voice recording started. Speak now...");
+
+                recognition.onresult = function(event) {
+                    const userSpeech = event.results[0][0].transcript;
+                    alert("✅ You said: " + userSpeech + "\nNow playing your reminder...");
+
+                    // Play audio after voice input
+                    let audio = document.getElementById("audioReminder");
+                    audio.pause();
+                    audio.currentTime = 0;
+                    audio.play().catch(error => {
+                        alert("⚠️ Could not play audio: " + error);
+                    });
+                };
+
+                recognition.onerror = function(event) {
+                    alert("⚠️ Error occurred while recording: " + event.error);
+                };
+            });
+        }
+    </script>
+
+    
+</body>
+
+</html>
